@@ -1,0 +1,100 @@
+<main role="main" class="container mt-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="/dashboard" class="list-group-item list-group-item-action active">Dashboard</a>
+                <a href="/workouts" class="list-group-item list-group-item-action">Workouts</a>
+                <a href="/settings" class="list-group-item list-group-item-action">Settings</a>
+                <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <h2>Welcome to your Dashboard</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-body h-100">
+                            <h5 class="card-title">Your Location</h5>
+                            <div id="map" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Section 2</h5>
+                            <p class="card-text">Content for section 2 goes here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Section 3</h5>
+                            <p class="card-text">Content for section 3 goes here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Section 4</h5>
+                            <p class="card-text">Content for section 4 goes here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Section 5</h5>
+                            <p class="card-text">Content for section 5 goes here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+
+    let latitude, longitude;
+    // Initialize Google Maps with a marker at a default location
+    function initMap() {
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: latitude, lng: longitude }, // Default to New York coordinates
+            zoom: 13,
+        });
+
+        // Optional: Add a marker at the default location
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: "Marker title"
+        });
+    }
+
+    async function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                initMap();
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+</script>
+
+<!-- Include the Google Maps JavaScript API with your API key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQcNWJ7y8FS8yPATp1RtGUNbFRZzsf5Q4&callback=getLocation" async defer></script>
