@@ -15,17 +15,16 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    // img: {
-    //   type: String,
-    //   default: null,
-    // },
     password: {
       type: String,
       required: true,
     },
-    // age: {
-    //   type: Number,
-    // },
+    workouts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Workout",
+      }
+    ],
   },
   { timestamps: true }
 );

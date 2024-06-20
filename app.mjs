@@ -9,6 +9,7 @@ import validator from 'validator';
 import dotenv from 'dotenv';
 import User from './models/User.mjs';
 import Workout from './models/Workout.mjs';
+import WorkoutCategory from './models/WorkoutCategory.mjs';
 import connectDB from './db.mjs';
 import bodyParser from 'body-parser';
 
@@ -53,6 +54,12 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+
+// Middleware to set the user data for templates
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -153,11 +160,9 @@ app.post('/login', async (req, res) => {
         const user = await User.findOne({ username: cleanUsername });
 
         if (user) {
-            // const hashedPassword = await bcrypt.hash(cleanPassword, 10);
             const isMatch = await bcrypt.compare(cleanPassword, user.password);
             if (isMatch) {
                 req.session.user = { id: user._id, email: user.email };
-                // req.session.username = user.username;
                 res.redirect('/dashboard');
             } else {
                 res.render('login', { error: 'Invalid credentials' });
@@ -188,7 +193,7 @@ app.get('/dashboard', (req, res) => {
 app.get('/workouts', async (req, res) => {
     if (req.session.user) {
         try {
-            const categories = await Workout.distinct('category');
+            const categories = await WorkoutCategory.distinct('category');
             res.render('workouts', { categories });
         } catch (err) {
             console.log(err);
@@ -204,7 +209,7 @@ app.get('/workouts/:category', async (req, res) => {
     if (req.session.user) {
         const category = req.params.category;
         try {
-            const workouts = await Workout.find({ category });
+            const workouts = await WorkoutCategory.find({ category });
             res.render('category-workouts', { category, workouts });
         } catch (err) {
             console.log(err);
@@ -212,6 +217,61 @@ app.get('/workouts/:category', async (req, res) => {
         }
     } else {
         res.redirect('/login');
+    }
+});
+
+// DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
+
+// Diary Route
+app.get('/diary', (req, res) => {
+    if (req.session.user) {
+        res.render('diary');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/diary', async (req, res) => {
+    const { category, workoutName, sets, reps, weight } = req.body;
+    const userId = req.session.user.id;
+
+    try {
+        const newWorkout = new Workout({
+            category,
+            workoutName,
+            sets,
+            reps,
+            weight
+        });
+
+        const savedWorkout = await newWorkout.save();
+
+        const user = await User.findById(userId);
+        user.workouts.push(savedWorkout);
+        await user.save();
+
+        res.redirect('/diary');
+    } catch (e) {
+        console.log(e);
+        res.render('diary', { error: 'Unable to add workout' });
+    }
+});
+
+// Fetch workouts for a specific date
+app.get('/diary/:date', async (req, res) => {
+    const { date } = req.params;
+    const userId = req.session.user.id;
+
+    try {
+        const user = await User.findById(userId).populate('workouts').exec();
+        const workoutsForDate = user.workouts.filter(workout => {
+            return workout.date.toISOString().split('T')[0] === date;
+        });
+
+        res.json({ workouts: workoutsForDate });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: 'Unable to fetch workouts' });
     }
 });
 

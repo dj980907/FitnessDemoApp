@@ -5,8 +5,7 @@
             <div class="list-group">
                 <a href="/dashboard" class="list-group-item list-group-item-action active">Dashboard</a>
                 <a href="/workouts" class="list-group-item list-group-item-action">Workouts</a>
-                <a href="/settings" class="list-group-item list-group-item-action">Settings</a>
-                <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
+                <a href="/diary" class="list-group-item list-group-item-action">Workout Diary</a>
             </div>
         </div>
         
@@ -17,7 +16,7 @@
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-body h-100">
-                            <h5 class="card-title">Your Location</h5>
+                            <h5 class="card-title">Location Demo</h5>
                             <div id="map" style="height: 300px;"></div>
                         </div>
                     </div>
@@ -27,8 +26,27 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">Section 2</h5>
-                            <p class="card-text">Content for section 2 goes here.</p>
+                            <h5 class="card-title">Payment Demo</h5>
+                            <!-- Credit Card Form -->
+                            <form id="payment-form" action="/process-payment" method="POST">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expiryDate">Expiry Date</label>
+                                    <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" name="cvv" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardHolderName">Card Holder Name</label>
+                                    <input type="text" class="form-control" id="cardHolderName" name="cardHolderName" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Pay</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -65,13 +83,12 @@
 
 <script>
 
-    let latitude, longitude;
     // Initialize Google Maps with a marker at a default location
-    function initMap() {
+    function initMap(latitude, longitude) {
 
         const map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: latitude, lng: longitude }, // Default to New York coordinates
-            zoom: 13,
+            zoom: 14,
         });
 
         // Optional: Add a marker at the default location
@@ -85,10 +102,9 @@
     async function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-                initMap();
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                initMap(latitude, longitude);
             });
         } else {
             console.log("Geolocation is not supported by this browser.");

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import Workout from './models/Workout.mjs';
+import WorkoutCategory from './models/WorkoutCategory.mjs';
 
 dotenv.config();
 
@@ -16,8 +16,8 @@ const connectDB = async () => {
             { category: 'Legs', description: 'A leg workout exercise', exercises: ['Squat', 'Lunges'] },
         ];
     
-        await Workout.deleteMany();
-        await Workout.insertMany(workouts);
+        await WorkoutCategory.deleteMany();
+        await WorkoutCategory.insertMany(workouts);
     
         console.log('Work Out Data Imported!');
 
