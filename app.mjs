@@ -151,13 +151,13 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const cleanUsername = sanitize(username);
+    const cleanEmail = sanitize(email);
     const cleanPassword = sanitize(password);
 
     try {
-        const user = await User.findOne({ username: cleanUsername });
+        const user = await User.findOne({ email: cleanEmail });
 
         if (user) {
             const isMatch = await bcrypt.compare(cleanPassword, user.password);
@@ -262,6 +262,7 @@ app.get('/diary/:date', async (req, res) => {
     const { date } = req.params;
     const userId = req.session.user.id;
 
+    console.log("this is user id: ", userId);
     try {
         const user = await User.findById(userId).populate('workouts').exec();
         const workoutsForDate = user.workouts.filter(workout => {
@@ -278,6 +279,9 @@ app.get('/diary/:date', async (req, res) => {
 // DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
 
 app.get('/logout', (req, res) => {
+
+    console.log("this is user id before logout: ", req.session.user.id);
+
     // Destroy the session
     req.session.destroy(err => {
         if (err) {
@@ -289,6 +293,7 @@ app.get('/logout', (req, res) => {
         // Redirect to login page after logout
         res.redirect('/login'); 
     });
+    // console.log("this is user id after logout: ", req.session.user.id);
 });
 
 // DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
