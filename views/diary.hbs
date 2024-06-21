@@ -6,11 +6,6 @@
             <a href="/workouts" class="list-group-item list-group-item-action">Workouts</a>
             <a href="/diary" class="list-group-item list-group-item-action active">Workout Diary</a>
         </div>
-        <!-- Calendar -->
-        <div class="mt-5">
-            <h4>Calendar</h4>
-            <div id='calendar' class=""></div>
-        </div>
     </div>
     
     <!-- Main Content -->
@@ -53,28 +48,31 @@
         <!-- Workouts List -->
         <div id="workouts" class="mt-4">
             <h2>Today's Workout</h2>
-            <!-- Workout cards will be appended here -->
+            <div class="row" id="workouts-row">
+                <!-- Workout cards will be appended here -->
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        console.log("hi");
-        fetchTodaysWorkouts();
+    console.log("Content is loaded for diary page");
+    fetchTodaysWorkouts();
 
-        const form = document.getElementById('workout-form');
-        const workoutsContainer = document.getElementById('workouts');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+    const form = document.getElementById('workout-form');
+    const workoutsContainer = document.getElementById('workouts-row');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            const category = document.getElementById('category').value;
-            const workoutName = document.getElementById('workoutName').value;
-            const sets = document.getElementById('sets').value;
-            const reps = document.getElementById('reps').value;
-            const weight = document.getElementById('weight').value;
+        const category = document.getElementById('category').value;
+        const workoutName = document.getElementById('workoutName').value;
+        const sets = document.getElementById('sets').value;
+        const reps = document.getElementById('reps').value;
+        const weight = document.getElementById('weight').value;
 
-            const workoutCard = `
+        const workoutCard = `
+            <div class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -89,27 +87,29 @@
                         </div>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
 
-            workoutsContainer.insertAdjacentHTML('beforeend', workoutCard);
+        workoutsContainer.insertAdjacentHTML('beforeend', workoutCard);
 
-            // Optionally, clear the form fields
-            form.reset();
-        });
+        form.reset();
     });
+});
 
-    function fetchTodaysWorkouts() {
-        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
-        const workoutsContainer = document.getElementById('workouts');
-        console.log("this is today:",today);
+function fetchTodaysWorkouts() {
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0]; 
+    const workoutsContainer = document.getElementById('workouts-row');
+    console.log("this is today:", today);
 
-        fetch(`/diary/${today}`)
-        .then(response => response.json())
-        .then(data => {
-            workoutsContainer.innerHTML = '';
-            if (data.workouts.length > 0) {
-                data.workouts.forEach(workout => {
-                    const workoutCard = `
+    fetch(`/diary/${today}`)
+    .then(response => response.json())
+    .then(data => {
+        workoutsContainer.innerHTML = '';
+        if (data.workouts.length > 0) {
+            data.workouts.forEach(workout => {
+                const workoutCard = `
+                    <div class="col-md-4">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -124,13 +124,15 @@
                                 </div>
                             </div>
                         </div>
-                    `;
-                    workoutsContainer.insertAdjacentHTML('beforeend', workoutCard);
-                });
-            } else {
-                workoutsContainer.innerHTML = '<p>No workouts for today.</p>';
-            }
-        })
-        .catch(error => console.error('Error fetching workouts:', error));
-    }
+                    </div>
+                `;
+                workoutsContainer.insertAdjacentHTML('beforeend', workoutCard);
+            });
+        } else {
+            workoutsContainer.innerHTML = '<p>No workouts for today.</p>';
+        }
+    })
+    .catch(error => console.error('Error fetching workouts:', error));
+}
+
 </script>

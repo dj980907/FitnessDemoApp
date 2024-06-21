@@ -12,6 +12,7 @@ import Workout from './models/Workout.mjs';
 import WorkoutCategory from './models/WorkoutCategory.mjs';
 import connectDB from './db.mjs';
 import bodyParser from 'body-parser';
+import { body, validationResult } from 'express-validator';
 
 dotenv.config();
 
@@ -189,6 +190,24 @@ app.get('/dashboard', (req, res) => {
 
 // DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
 
+// Plans Route
+app.get('/plans', (req, res) => {
+    res.render('plans');
+});
+
+// DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
+
+// checkout Route
+app.get('/checkout', (req, res) => {
+    if (req.session.user) {
+        res.render('checkout');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+// DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
+
 // Workouts Route
 app.get('/workouts', async (req, res) => {
     if (req.session.user) {
@@ -262,7 +281,6 @@ app.get('/diary/:date', async (req, res) => {
     const { date } = req.params;
     const userId = req.session.user.id;
 
-    console.log("this is user id: ", userId);
     try {
         const user = await User.findById(userId).populate('workouts').exec();
         const workoutsForDate = user.workouts.filter(workout => {
@@ -278,9 +296,32 @@ app.get('/diary/:date', async (req, res) => {
 
 // DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
 
-app.get('/logout', (req, res) => {
+const sanitizeAndValidateInput = [
+    body('cardNumber').trim().isNumeric().isLength({ min: 16, max: 16 }),
+    body('expiryDate').trim().isLength({ min: 5, max: 5 }).matches(/^(0[1-9]|1[0-2])\/\d{2}$/),
+    body('cvv').trim().isNumeric().isLength({ min: 3, max: 3 }),
+    body('cardHolderName').trim().isString().isLength({ min: 2 })
+];
 
-    console.log("this is user id before logout: ", req.session.user.id);
+// payment processing route
+app.post('/process-payment', (req, res) => {
+
+    // Sanitized and validated data from request body
+    const { cardNumber, expiryDate, cvv, cardHolderName } = req.body;
+
+    const cleanCardNumber = sanitize(cardNumber);
+    const cleanExpiryDate = sanitize(expiryDate);
+    const cleanCVV = sanitize(cvv);
+    const cleanCardHolderName = sanitize(cardHolderName);
+
+    // For Demo purposes, just send a success response
+    console.log('Received payment details:', { cleanCardNumber, cleanExpiryDate, cleanCVV, cleanCardHolderName });
+    res.status(200).json({ message: 'Payment successful!' });
+});
+
+// DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER
+
+app.get('/logout', (req, res) => {
 
     // Destroy the session
     req.session.destroy(err => {
@@ -293,7 +334,6 @@ app.get('/logout', (req, res) => {
         // Redirect to login page after logout
         res.redirect('/login'); 
     });
-    // console.log("this is user id after logout: ", req.session.user.id);
 });
 
 // DIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDERDIVIDER

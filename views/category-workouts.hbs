@@ -1,4 +1,4 @@
-<div class="row">
+{{!-- <div class="row">
     <div class="col-md-3">
         <div class="list-group">
             <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
@@ -21,9 +21,48 @@
                             <li>{{this}}</li>
                             {{/each}}
                         </ul>
+                        {{#each exercises}}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{this}}</h5>
+                                    <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
+            {{/each}}
+        </div>
+    </div>
+</div> --}}
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+            <a href="/workouts" class="list-group-item list-group-item-action active">Workouts</a>
+            <a href="/diary" class="list-group-item list-group-item-action">Workout Diary</a>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <h2>{{category}} Workouts</h2>
+        <div class="row">
+            {{#each workouts}}
+                {{#each exercises}}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this}}</h5>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             {{/each}}
         </div>
     </div>
