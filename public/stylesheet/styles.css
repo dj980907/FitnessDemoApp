@@ -1,205 +1,49 @@
-/* Global */
-* {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica;
-  }
-  
-  /* Header */
-  header {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px 50px;
-    box-shadow: 0 1px 8px #878787;
-    height: 75px;
-  }
-  
-  #nav-title {
-    margin-right: auto;
-    font-size: 3em;
-  }
-  
-  header li {
-    list-style: none;
-    display: inline-block;
-    padding: 0 20px;
-  }
-  
-  header a {
-    text-decoration: none;
-    color: #555;
-    transition: all 0.3s ease 0s;
-  }
-  
-  header a:hover {
-    color: #b2dfdb;
-  }
-  
-  body {
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  body {
-  
-    height: 100%; 
-    margin: 0; 
-    justify-content: center;
-    align-items: center;
-    background-color: #dbd9d9;
-  }
-  
-  body h1{
-    text-align: center;
-  }
-  
-  body a{
-    text-align: center;
-  }
-  
-  form {
-    margin-top: 10%;
-    text-align: center;
-  }
-  
-  h2{
-    text-align: center;
-  }
-  
-  body .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .userID{
-    position: absolute;
-    right: 0px;
-  }
-  
-  .ootd-grid {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: center; */
-  }
-  
-  .ootd-item {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    width: 17%; 
-  }
-  
-  p{
-    text-align: center;
-  }
-  
-  img{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-  }
-  
-  .ootd-detail-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80%;
-    margin-top: 20px;
-  }
-  
-  .picture {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    flex: 1;
-    height: 100%;
-  }
-  
-  .details {
-    flex: 2;
-    /* flex-direction: column; */
-  }
-  
-  .titleContainer{
-    margin-top: 0;
-    /* flex: 1; */
-  }
-  
-  button {
-    background-color: #373737; 
-    color: white; 
-    padding: 10px 20px; 
-    border: black;
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  
-  button:hover {
-    background-color: #727272; 
-  }
-  
-  .ootd-form {
-    max-width: 420px; 
-    margin: auto; 
-    padding: 20px; 
-    background-color: rgba(255, 255, 255, 0.5);
-    justify-content: center;
-  }
-  
-  .description{
-    height:200px;
-  }
-  
-  h2 {
-    text-align: center; 
-  }
-  
-  label {
-    display: block; 
-    margin-bottom: 5px; 
-  }
-  
-  input {
-    width: calc(100% - 20px);
-    padding: 8px; 
-    margin-bottom: 15px; 
-    border-color: black;
-  }
-  
-  input[type="text"]{
-    max-width: 420px;
-  }
-  
-  input[type="submit"] {
-    background-color: #373737; 
-    color: white; 
-    padding: 10px 20px; 
-    border: black; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    max-width: 420px;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #727272; /* Change background color on hover */
-  }
-  
-  .comments-section h2{
-    border-color: black;
-  }
+.body-custom {
+  background-image: url('/assets/img/background.png');
+  background-size: auto;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+}
+
+.jumbotron-custom {
+  background-image: url('/assets/img/hero.png');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Ensure text is readable */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: add text shadow for better readability */
+}
+
+.jumbotron-custom .content {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.feature1 {
+  background-image: url('/assets/img/feature1.png');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Ensure text is readable */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: add text shadow for better readability */
+}
+
+.feature2 {
+  background-image: url('/assets/img/feature2.png');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Ensure text is readable */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: add text shadow for better readability */
+}
+
+.feature3 {
+  background-image: url('/assets/img/feature3.png');
+  background-size: cover;
+  background-position: center;
+  color: white; /* Ensure text is readable */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: add text shadow for better readability */
+}
+
+.card-body-custom {
+  height: 300px;
+}

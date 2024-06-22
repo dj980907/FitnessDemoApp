@@ -10,10 +10,10 @@
     
     <!-- Main Content -->
     <div class="col-md-9">
-        <h2>Workout Diary</h2>
+        <h2 style="color: white">Workout Diary</h2>
         <form action="/diary" method="POST">
             <div class="form-group">
-                <label for="category">Category</label>
+                <label for="category" style="color: white">Category</label>
                 <select class="form-control" id="category" name="category">
                     <option value="Chest">Chest</option>
                     <option value="Back">Back</option>
@@ -22,7 +22,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="workoutName">Workout Name</label>
+                <label for="workoutName" style="color: white">Workout Name</label>
                 <select class="form-control" id="workoutName" name="workoutName">
                     <option value="Bench Press">Bench Press</option>
                     <option value="Deadlift">Deadlift</option>
@@ -31,23 +31,23 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="sets">Sets</label>
+                <label for="sets" style="color: white">Sets</label>
                 <input type="number" class="form-control" id="sets" name="sets" required>
             </div>
             <div class="form-group">
-                <label for="reps">Reps</label>
+                <label for="reps" style="color: white">Reps</label>
                 <input type="number" class="form-control" id="reps" name="reps" required>
             </div>
             <div class="form-group">
-                <label for="weight">Weight</label>
+                <label for="weight" style="color: white">Weight</label>
                 <input type="number" class="form-control" id="weight" name="weight" required>
             </div>
-            <button type="submit" class="btn btn-primary">Add Workout</button>
+            <button type="submit" class="btn btn-primary btn-outline-light" style="background-color: #cc2b2b;">Add Workout</button>
         </form>
 
         <!-- Workouts List -->
         <div id="workouts" class="mt-4">
-            <h2>Today's Workout</h2>
+            <h2 style="color: white">Today's Workout</h2>
             <div class="row" id="workouts-row">
                 <!-- Workout cards will be appended here -->
             </div>

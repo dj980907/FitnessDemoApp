@@ -11,13 +11,13 @@
         
         <!-- Main Content -->
         <div class="col-md-9">
-            <h2>Workouts Library</h2>
+            <h2 style="color: white">Workouts Library</h2>
             <div class="row">
                 {{#each categories}}
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-body h-100">
-                            <h5 class="card-title display-1"><a href="/workouts/{{this}}">{{this}}</a></h5>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body card-body-custom" style="background-image: url('assets/img/{{this}}.jpg'); background-size: cover; background-position: center; color: white;">
+                            <h5 class="card-title"><a href="/workouts/{{this}}">{{this}}</a></h5>
                         </div>
                     </div>
                 </div>
