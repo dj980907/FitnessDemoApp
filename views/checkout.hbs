@@ -1,11 +1,10 @@
-<div class="container mt-5">
+<div class="container mt-5" style="color: white;">
     <h2 class="text-center mb-4">Secure Payment Page</h2>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mb-4">
+            <div class="card mb-4 bg-dark">
                 <div class="card-body">
-                    <h5 class="card-title" style="color: white">Payment Demo</h5>
-                    <!-- Credit Card Form -->
+                    <h5 class="card-title">Payment Demo</h5>
                     <form id="payment-form" action="/process-payment" method="POST">
                         <div class="form-group">
                             <label for="cardNumber">Card Number</label>
@@ -23,7 +22,7 @@
                             <label for="cardHolderName">Card Holder Name</label>
                             <input type="text" class="form-control" id="cardHolderName" name="cardHolderName" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Pay</button>
+                        <button type="submit" class="btn btn-primary btn-outline-light" style="background-color: #cc2b2b;">Pay</button>
                     </form>
                 </div>
             </div>
@@ -36,7 +35,8 @@
         const paymentForm = document.getElementById('payment-form');
 
         paymentForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
+            // Prevent the form from submitting
+            event.preventDefault();
 
             // Collect form data
             const formData = {
@@ -63,7 +63,6 @@
             .then(data => {
                 console.log('Payment successful:', data);
                 alert('Payment successful!');
-                // Example: Redirect to a thank you page
                 window.location.href = '/dashboard';
             })
             .catch(error => {

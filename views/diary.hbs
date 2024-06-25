@@ -1,14 +1,12 @@
 <div class="row">
-    <!-- Sidebar -->
     <div class="col-md-3">
-        <div class="list-group">
+        <div class="list-group list-group-custom">
             <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
             <a href="/workouts" class="list-group-item list-group-item-action">Workouts</a>
             <a href="/diary" class="list-group-item list-group-item-action active">Workout Diary</a>
         </div>
     </div>
     
-    <!-- Main Content -->
     <div class="col-md-9">
         <h2 style="color: white">Workout Diary</h2>
         <form action="/diary" method="POST">
@@ -45,11 +43,9 @@
             <button type="submit" class="btn btn-primary btn-outline-light" style="background-color: #cc2b2b;">Add Workout</button>
         </form>
 
-        <!-- Workouts List -->
         <div id="workouts" class="mt-4">
             <h2 style="color: white">Today's Workout</h2>
             <div class="row" id="workouts-row">
-                <!-- Workout cards will be appended here -->
             </div>
         </div>
     </div>

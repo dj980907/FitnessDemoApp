@@ -1,26 +1,27 @@
 <main role="main" class="container mt-5">
     <div class="row">
-        <!-- Sidebar -->
         <div class="col-md-3">
-            <div class="list-group">
+            <div class="list-group list-group-custom">
                 <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
                 <a href="/workouts" class="list-group-item list-group-item-action active">Workouts</a>
                 <a href="/diary" class="list-group-item list-group-item-action">Workout Diary</a>
             </div>
         </div>
         
-        <!-- Main Content -->
-        <div class="col-md-9">
-            <h2 style="color: white">Workouts Library</h2>
+        <div class="col-md-9" style="color: white">
+            <h2>Workouts Library</h2>
             <div class="row">
                 {{#each categories}}
-                <div class="col-md-6">
-                    <div class="card mb-3">
-                        <div class="card-body card-body-custom" style="background-image: url('assets/img/{{this}}.jpg'); background-size: cover; background-position: center; color: white;">
-                            <h5 class="card-title"><a href="/workouts/{{this}}">{{this}}</a></h5>
+                    <div class="col-md-6">
+                        <div class="card mb-3 bg-dark text-center">
+                            <a href="/workouts/{{this}}">
+                                <div class="card-body card-body-custom" style="background-image: url('assets/img/{{this}}.jpg'); background-size: cover; background-position: center; color: white;">
+                                </div>
+                                <h5 class="card-title" style="color: white">{{this}}</h5>
+                            </a>
                         </div>
+                        </a>
                     </div>
-                </div>
                 {{/each}}
             </div>
         </div>

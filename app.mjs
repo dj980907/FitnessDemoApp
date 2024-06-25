@@ -34,13 +34,13 @@ app.use(express.urlencoded({ extended: false }));
 
 // Configure session management
 const sessionOptions = {
-    secret: process.env.SESSION_SECRET || 'default_secret', // Use environment variable for session secret
+    secret: process.env.SESSION_SECRET || 'default_secret',
     saveUninitialized: false,
     resave: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Set to true in production
+        secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 // 1 day
+        maxAge: 1000 * 60 * 60 * 24
     }
 };
 

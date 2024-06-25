@@ -23,14 +23,15 @@ const connectDB = async () => {
                     "Pec Deck Machine",
                     "Decline Bench Press",
                     "Machine Chest Press",
-                    "Push-Ups (Variations like Wide Grip, Close Grip)"
+                    "Wide Grip Push-Ups"
                 ]
             },
             { 
                 category: 'Back', 
                 description: 'A back workout exercise', 
                 exercises: [
-                    "Pull-Ups/Chin-Ups",
+                    "Pull-Ups",
+                    "Chin-Ups",
                     "Deadlifts",
                     "Barbell Rows",
                     "Dumbbell Rows",
@@ -38,7 +39,6 @@ const connectDB = async () => {
                     "T-Bar Rows",
                     "Seated Cable Rows",
                     "Hyperextensions",
-                    "Single-Arm Dumbbell Rows",
                     "Good Mornings"
                 ] 
             },
@@ -46,7 +46,8 @@ const connectDB = async () => {
                 category: 'Shoulders', 
                 description: 'A shoulder workout exercise', 
                 exercises: [
-                    "Overhead Press (Barbell or Dumbbell)",
+                    "Barbell Overhead Press",
+                    "Dumbbell Overhead Press",
                     "Lateral Raises",
                     "Front Raises",
                     "Arnold Press",
@@ -54,7 +55,6 @@ const connectDB = async () => {
                     "Shoulder Press Machine",
                     "Face Pulls",
                     "Reverse Flyes",
-                    "Shrugs (Barbell or Dumbbell)",
                     "Handstand Push-Ups"
                 ]
             },
@@ -62,13 +62,13 @@ const connectDB = async () => {
                 category: 'Legs', 
                 description: 'A leg workout exercise', 
                 exercises: [
-                    "Squats (Barbell or Dumbbell)",
-                    "Deadlifts (Conventional or Sumo)",
+                    "Barbell Squats",
+                    "Sumo Deadlifts",
                     "Leg Press",
-                    "Lunges (Walking Lunges, Reverse Lunges)",
+                    "Walking Lunges",
                     "Leg Extensions",
                     "Leg Curls",
-                    "Calf Raises (Standing or Seated)",
+                    "Calf Raises",
                     "Glute Bridges",
                     "Step-Ups",
                     "Box Jumps"
